@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/_3DStealthGame/Tutorial_Demo/Demo_Scenes/DemoScene.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
