@@ -5753,6 +5753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectible
   rotationSpeed: 0.3
+  onCollectEffect: {fileID: 5642766282230003982, guid: eaab0e2771cca49c492b15521f37ce1e, type: 3}
 --- !u!1 &1267300456
 GameObject:
   m_ObjectHideFlags: 0
