@@ -26,6 +26,8 @@ public class Collectible : MonoBehaviour
         if
             (other.CompareTag("Player"))
         {
+            FindObjectOfType<CandyManager>().AddCandy();
+
             // Instantiate the particle effect
             Instantiate(onCollectEffect, transform.position, transform.rotation);
         }

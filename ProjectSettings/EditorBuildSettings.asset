@@ -4,5 +4,27 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Haunted House/Assets/Level 1.unity
+    guid: 2189216aa63279344ad6570dcf040819
+  - enabled: 1
+    path: Assets/Haunted House/Assets/Level 2.unity
+    guid: 7e2555d61c3594441ae8f61a0a751ca2
+  - enabled: 1
+    path: Assets/Haunted House/Assets/Level 3.unity
+    guid: 99e4d27603408194987d6286f364105c
+  - enabled: 1
+    path: Assets/Haunted House/Assets/Level 4.unity
+    guid: fdb4cac2a3747a9448e9b28136cdb70b
+  - enabled: 1
+    path: Assets/Haunted House/Assets/Level 5.unity
+    guid: d2a86080955683d4ea503134d97a6cb3
+  - enabled: 1
+    path: Assets/Haunted House/Assets/Level 6.unity
+    guid: ab8bdd693a1e5ee44a952dd9d0785c0f
+  - enabled: 1
+    path: Assets/Town Layout.unity
+    guid: 97b0f64fe50faeb41a178a6589884066
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
