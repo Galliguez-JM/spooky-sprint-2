@@ -83,7 +83,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Roughness: 2.98
+    - _Roughness: 0
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
