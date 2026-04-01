@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Haunted House/Assets/Main Menu.unity
+    guid: 086197aacef2445c1887e6cbf161fd10
+  - enabled: 1
     path: Assets/Haunted House/Assets/Level 1.unity
     guid: 2189216aa63279344ad6570dcf040819
   - enabled: 1
