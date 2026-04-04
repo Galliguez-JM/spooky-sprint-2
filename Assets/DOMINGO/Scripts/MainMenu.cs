@@ -8,9 +8,16 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        // Clear old data so the clock resets to 7 PM
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetInt("CurrentHour", 19);
+        PlayerPrefs.SetInt("CorrectHouse", 1);
+        PlayerPrefs.SetInt("HasSavedPos", 0);
+        PlayerPrefs.Save(); // Makes sure it writes to the disk immediately
 
+        SceneManager.LoadScene(7); // Load your Hub
     }
+
 
 
     public void QuitGame()

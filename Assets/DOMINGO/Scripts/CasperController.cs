@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement; // Added for scene checking
 
 public class CasperController : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float speed = 5.0f;
-    public float stopThreshold = 0.1f; // Helps stop "drifting"
+    public float stopThreshold = 0.1f;
 
     [Header("Look Settings")]
     public float mouseSensitivity = 100f;
@@ -19,7 +20,24 @@ public class CasperController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
 
-        // IMPORTANT: Set Interpolation to "Interpolate" in the Inspector Rigidbody settings!
+        // --- NEW: LOAD POSITION LOGIC ---
+        // If we are in the Town (Index 7) and have a saved position, teleport Casper
+        if (SceneManager.GetActiveScene().buildIndex == 7 && PlayerPrefs.GetInt("HasSavedPos", 0) == 1)
+        {
+            float x = PlayerPrefs.GetFloat("PlayerX");
+            float y = PlayerPrefs.GetFloat("PlayerY");
+            float z = PlayerPrefs.GetFloat("PlayerZ");
+
+            Vector3 savedPos = new Vector3(x, y, z);
+
+            // Move both the transform and the physics body
+            transform.position = savedPos;
+            if (rb != null) rb.position = savedPos;
+
+            Debug.Log("Casper returned to saved town position: " + savedPos);
+        }
+        // --------------------------------
+
         if (rb == null) Debug.LogWarning("CasperController needs a Rigidbody.");
     }
 
@@ -47,14 +65,12 @@ public class CasperController : MonoBehaviour
 
         if (moveInput.magnitude > stopThreshold)
         {
-            // Move using velocity so physics (gravity/walls) works naturally
             Vector3 targetVelocity = moveInput * speed;
-            targetVelocity.y = rb.linearVelocity.y; // Keep current gravity/falling speed
+            targetVelocity.y = rb.linearVelocity.y;
             rb.linearVelocity = targetVelocity;
         }
         else
         {
-            // Force a full stop on X/Z so you don't slide like soap in corners
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
         }
     }
