@@ -10,26 +10,27 @@ public class NPC_Dialogue : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
     public GameObject choiceButtons;
-
-    // We add these to find the buttons automatically
     public Button enterButton;
     public Button stayButton;
 
     [Header("NPC Info")]
     public string npcName = "MR. PEEK N. BOO";
     public string houseSceneName = "Level 1";
+    public int thisNPCHouseID = 1; // Set this to 1 for NPC1, 2 for NPC2, etc.
 
     [Header("Dialogue Content")]
     [TextArea(3, 10)]
-    public string[] dialogueLines;
+    public string[] initialDialogue; // First time talking
+    [TextArea(3, 10)]
+    public string[] hintDialogue;    // Dialogue after their house is finished
 
+    private string[] currentDialogueSet; // The set we are currently using
     private int currentLine = 0;
     private bool isPlayerNear = false;
     private bool isDialogueActive = false;
 
     void Start()
     {
-        // Safety: If you forgot to drag buttons in, try to find them
         if (enterButton == null && choiceButtons != null)
             enterButton = choiceButtons.transform.Find("Enter").GetComponent<Button>();
         if (stayButton == null && choiceButtons != null)
@@ -57,10 +58,22 @@ public class NPC_Dialogue : MonoBehaviour
 
         choiceButtons.SetActive(false);
         nameText.text = npcName;
+
+        // --- NEW: LOGIC TO PICK DIALOGUE ---
+        int nextHouseNeeded = PlayerPrefs.GetInt("CorrectHouse", 1);
+
+        // If the player has already finished THIS NPC's house, show the hint instead
+        if (nextHouseNeeded > thisNPCHouseID)
+        {
+            currentDialogueSet = hintDialogue;
+        }
+        else
+        {
+            currentDialogueSet = initialDialogue;
+        }
+
         DisplayLine();
 
-        // --- THE FIX: HIJACK THE BUTTONS ---
-        // This clears whatever NPC was linked before and links THIS NPC
         if (enterButton != null)
         {
             enterButton.onClick.RemoveAllListeners();
@@ -71,7 +84,6 @@ public class NPC_Dialogue : MonoBehaviour
             stayButton.onClick.RemoveAllListeners();
             stayButton.onClick.AddListener(CloseDialogue);
         }
-        // ----------------------------------
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -79,13 +91,13 @@ public class NPC_Dialogue : MonoBehaviour
 
     void DisplayLine()
     {
-        dialogueText.text = dialogueLines[currentLine];
+        dialogueText.text = currentDialogueSet[currentLine];
     }
 
     void NextLine()
     {
         currentLine++;
-        if (currentLine < dialogueLines.Length)
+        if (currentLine < currentDialogueSet.Length)
         {
             DisplayLine();
         }
@@ -109,12 +121,7 @@ public class NPC_Dialogue : MonoBehaviour
                 PlayerPrefs.SetInt("HasSavedPos", 1);
                 PlayerPrefs.Save();
             }
-
             SceneManager.LoadScene(houseSceneName);
-        }
-        else
-        {
-            Debug.LogError(gameObject.name + " has no scene name set!");
         }
     }
 
@@ -123,7 +130,6 @@ public class NPC_Dialogue : MonoBehaviour
         isDialogueActive = false;
         if (dialoguePanel.TryGetComponent(out CanvasGroup cg)) cg.alpha = 0f;
         dialoguePanel.SetActive(false);
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     {
         // Clear old data so the clock resets to 7 PM
         PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetInt("CurrentHour", 19);
+        PlayerPrefs.SetInt("CurrentHour", 17);
         PlayerPrefs.SetInt("CorrectHouse", 1);
         PlayerPrefs.SetInt("HasSavedPos", 0);
         PlayerPrefs.Save(); // Makes sure it writes to the disk immediately
