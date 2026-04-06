@@ -2311,6 +2311,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: _Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 4522363696389434815, guid: f303ab6502fff4c40aec02424e441dd4, type: 3}
+      propertyPath: volumeSlider
+      value: 
+      objectReference: {fileID: 868551083}
+    - target: {fileID: 4522363696389434815, guid: f303ab6502fff4c40aec02424e441dd4, type: 3}
+      propertyPath: bgMusicSource
+      value: 
+      objectReference: {fileID: 1543302801}
     - target: {fileID: 4802129127529863419, guid: f303ab6502fff4c40aec02424e441dd4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.55755
@@ -2367,10 +2375,26 @@ PrefabInstance:
       propertyPath: totalCandiesInHouse
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7612741555465623539, guid: f303ab6502fff4c40aec02424e441dd4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8006101174613010018, guid: f303ab6502fff4c40aec02424e441dd4, type: 3}
       propertyPath: pauseMenuPanel
       value: 
       objectReference: {fileID: 1510954385}
+    - target: {fileID: 8921792447426197297, guid: f303ab6502fff4c40aec02424e441dd4, type: 3}
+      propertyPath: houseID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8921792447426197297, guid: f303ab6502fff4c40aec02424e441dd4, type: 3}
+      propertyPath: fillImage
+      value: 
+      objectReference: {fileID: 116522342}
+    - target: {fileID: 8921792447426197297, guid: f303ab6502fff4c40aec02424e441dd4, type: 3}
+      propertyPath: fadeOverlay
+      value: 
+      objectReference: {fileID: 192303415}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3563,6 +3587,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 410e30533efd4b546921ec73fe9c59e1, type: 3}
+--- !u!114 &868551083 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11663121818073845, guid: 410e30533efd4b546921ec73fe9c59e1, type: 3}
+  m_PrefabInstance: {fileID: 868551082}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!65 &884247619
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4862,6 +4897,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Collectible
   rotationSpeed: 0.3
   onCollectEffect: {fileID: 5642766282230003982, guid: eaab0e2771cca49c492b15521f37ce1e, type: 3}
+  collectSound: {fileID: 8300000, guid: c0f716a9e9ac00c438b95158ba195a58, type: 3}
+  volume: 0.489
 --- !u!65 &1285901057
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5857,6 +5894,68 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2560970138133653832, guid: 410e30533efd4b546921ec73fe9c59e1, type: 3}
   m_PrefabInstance: {fileID: 868551082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1543302800
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1116063631634332371, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.27390867
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116063631634332371, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 24.615833
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116063631634332371, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2300465
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116063631634332371, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116063631634332371, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116063631634332371, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116063631634332371, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116063631634332371, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116063631634332371, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116063631634332371, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859773098170711340, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+      propertyPath: m_Name
+      value: BG music Levels
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+--- !u!82 &1543302801 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8618994839954154086, guid: 47100a1e081a9a244bcb8465ef013972, type: 3}
+  m_PrefabInstance: {fileID: 1543302800}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1549533566
 GameObject:
@@ -7103,6 +7202,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CasperController
   speed: 5
   stopThreshold: 0.1
+  canLook: 1
+  stepHeight: 0.4
+  floatPower: 4
   mouseSensitivity: 20
   cameraTransform: {fileID: 0}
 --- !u!1001 &1841311306
@@ -8181,3 +8283,4 @@ SceneRoots:
   - {fileID: 1818702516}
   - {fileID: 1264274828}
   - {fileID: 868551082}
+  - {fileID: 1543302800}

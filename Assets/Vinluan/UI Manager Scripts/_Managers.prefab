@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4802129127529863419}
   - component: {fileID: 8006101174613010018}
-  - component: {fileID: 4814364939459209542}
   - component: {fileID: 1671987769673382646}
   - component: {fileID: 6540481901870658084}
   - component: {fileID: 7612741555465623539}
+  - component: {fileID: 4522363696389434815}
+  - component: {fileID: 8921792447426197297}
   m_Layer: 0
   m_Name: _Managers
   m_TagString: Untagged
@@ -49,22 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenuPanel: {fileID: 0}
---- !u!114 &4814364939459209542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3561970260700978276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f6ebec8808808747871a72ee55c58ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CandyManager
-  fillImage: {fileID: 0}
-  fadeOverlay: {fileID: 0}
-  totalCandiesInHouse: 0
-  houseID: 1
 --- !u!114 &1671987769673382646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,3 +87,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HouseManager
   timerText: {fileID: 0}
+  candyTrackerText: {fileID: 0}
+  monsterObject: {fileID: 0}
+--- !u!114 &4522363696389434815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3561970260700978276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391b2434421ddbc48add3d35647b1eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeController
+  volumeSlider: {fileID: 0}
+--- !u!114 &8921792447426197297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3561970260700978276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6ebec8808808747871a72ee55c58ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CandyManager
+  fillImage: {fileID: 0}
+  fadeOverlay: {fileID: 0}
+  totalCandiesInHouse: 1
+  houseID: 2
+  totalHousesInGame: 6

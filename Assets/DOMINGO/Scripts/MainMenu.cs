@@ -13,9 +13,10 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("CurrentHour", 17);
         PlayerPrefs.SetInt("CorrectHouse", 1);
         PlayerPrefs.SetInt("HasSavedPos", 0);
+        PlayerPrefs.SetInt("TotalCandies", 0);
         PlayerPrefs.Save(); // Makes sure it writes to the disk immediately
 
-        SceneManager.LoadScene(7); // Load your Hub
+        SceneManager.LoadScene(10); // Load your Hub
     }
 
 

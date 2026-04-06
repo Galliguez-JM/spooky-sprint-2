@@ -1,12 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement; // Added for scene checking
+using UnityEngine.SceneManagement;
 
 public class CasperController : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float speed = 5.0f;
     public float stopThreshold = 0.1f;
+    public bool canLook = true;
+
+    [Header("Ghost Floating Settings")]
+    public float stepHeight = 0.4f;   // How high Casper can "float" over a ledge
+    public float floatPower = 4.0f;  // The strength of the upward nudge
 
     [Header("Look Settings")]
     public float mouseSensitivity = 100f;
@@ -20,29 +25,33 @@ public class CasperController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
 
-        // --- NEW: LOAD POSITION LOGIC ---
-        // If we are in the Town (Index 7) and have a saved position, teleport Casper
         if (SceneManager.GetActiveScene().buildIndex == 7 && PlayerPrefs.GetInt("HasSavedPos", 0) == 1)
         {
             float x = PlayerPrefs.GetFloat("PlayerX");
             float y = PlayerPrefs.GetFloat("PlayerY");
             float z = PlayerPrefs.GetFloat("PlayerZ");
-
             Vector3 savedPos = new Vector3(x, y, z);
 
-            // Move both the transform and the physics body
-            transform.position = savedPos;
-            if (rb != null) rb.position = savedPos;
+            RigidbodyInterpolation oldInterpolation = rb.interpolation;
+            rb.interpolation = RigidbodyInterpolation.None;
 
-            Debug.Log("Casper returned to saved town position: " + savedPos);
+            transform.position = savedPos;
+            rb.position = savedPos;
+
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            rb.interpolation = oldInterpolation;
+            Debug.Log("Casper successfully teleported to: " + savedPos);
         }
-        // --------------------------------
 
         if (rb == null) Debug.LogWarning("CasperController needs a Rigidbody.");
     }
 
     private void Update()
     {
+        if (!canLook) return;
+
         Vector2 mouseDelta = Mouse.current.delta.ReadValue() * mouseSensitivity * Time.deltaTime;
         transform.Rotate(Vector3.up * mouseDelta.x);
 
@@ -53,6 +62,26 @@ public class CasperController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!canLook)
+        {
+            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+            return;
+        }
+
+        // --- NEW: LEDGE BYPASS / GHOST FLOAT ---
+        // Shoot a raycast forward at feet level to see if we hit a small ledge
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + Vector3.up * 0.1f, transform.forward, out hit, 0.6f))
+        {
+            // If we hit a ledge, check if there is empty space at Casper's 'knee' level
+            if (!Physics.Raycast(transform.position + Vector3.up * stepHeight, transform.forward, 0.7f))
+            {
+                // Lift Casper up slightly to glide over the ledge
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, floatPower, rb.linearVelocity.z);
+            }
+        }
+        // --------------------------------------
+
         float moveX = 0;
         float moveZ = 0;
 

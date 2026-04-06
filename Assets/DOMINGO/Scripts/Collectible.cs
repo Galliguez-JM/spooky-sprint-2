@@ -2,20 +2,13 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    public float
-        rotationSpeed;
+    public float rotationSpeed = 1f;
+    public GameObject onCollectEffect;
 
-    public GameObject
-        onCollectEffect;
+    [Header("Audio Settings")]
+    public AudioClip collectSound; // Drag your candy pickup sound here
+    [Range(0, 1)] public float volume = 1f;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         transform.Rotate(0, rotationSpeed, 0);
@@ -23,19 +16,27 @@ public class Collectible : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if
-            (other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            FindObjectOfType<CandyManager>().AddCandy();
+            // 1. Tell CandyManager to add candy and update UI
+            CandyManager manager = FindObjectOfType<CandyManager>();
+            if (manager != null) manager.AddCandy();
 
-            // Instantiate the particle effect
-            Instantiate(onCollectEffect, transform.position, transform.rotation);
+            // 2. Play the sound at the candy's position
+            // We use PlayClipAtPoint because the candy object is about to be destroyed
+            if (collectSound != null)
+            {
+                AudioSource.PlayClipAtPoint(collectSound, transform.position, volume);
+            }
+
+            // 3. Instantiate the particle effect
+            if (onCollectEffect != null)
+            {
+                Instantiate(onCollectEffect, transform.position, transform.rotation);
+            }
+
+            // 4. Destroy the collectible
+            Destroy(gameObject);
         }
-
-        // Destroy the collectible
-        Destroy(gameObject);
-
-        // Instantiate the particle effect
-        Instantiate(onCollectEffect, transform.position, transform.rotation);
     }
 }

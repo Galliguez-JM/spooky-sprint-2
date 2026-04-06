@@ -6,17 +6,24 @@ public class HouseManager : MonoBehaviour
 {
     [Header("UI References")]
     public TextMeshProUGUI timerText;
-    public TextMeshProUGUI candyTrackerText; // NEW: Drag your "0/6" text here
+    public TextMeshProUGUI candyTrackerText;
+
+    [Header("Midnight Chase Settings")]
+    public GameObject monsterObject;
 
     void Start()
     {
         int currentHour = PlayerPrefs.GetInt("CurrentHour", 17);
         UpdateTimerUI(currentHour);
-        UpdateCandyUI(); // NEW: Update the candy count
+        UpdateCandyUI();
 
         if (currentHour >= 24)
         {
-            TriggerGameOver();
+            TriggerMidnightEvent();
+        }
+        else
+        {
+            if (monsterObject != null) monsterObject.SetActive(false);
         }
     }
 
@@ -36,13 +43,11 @@ public class HouseManager : MonoBehaviour
         }
     }
 
-    // --- NEW FUNCTION: UPDATES CANDY COUNT ---
     void UpdateCandyUI()
     {
-        // Since CorrectHouse starts at 1, we subtract 1 to show 0/6 at the start
-        int candiesCollected = PlayerPrefs.GetInt("CorrectHouse", 1) - 1;
+        // Pull the actual number of unique houses cleared
+        int candiesCollected = PlayerPrefs.GetInt("TotalCandies", 0);
 
-        // Clamp it so it doesn't show 7/6 if they win
         if (candiesCollected > 6) candiesCollected = 6;
 
         if (candyTrackerText != null)
@@ -51,8 +56,17 @@ public class HouseManager : MonoBehaviour
         }
     }
 
-    void TriggerGameOver()
+    void TriggerMidnightEvent()
     {
-        SceneManager.LoadScene("GameOverScene");
+        if (monsterObject != null)
+        {
+            monsterObject.SetActive(true);
+            MonsterFollow chase = monsterObject.GetComponent<MonsterFollow>();
+            if (chase != null) chase.enabled = true;
+        }
+        else
+        {
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
 }
